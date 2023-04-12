@@ -17,9 +17,9 @@ class PostController extends BaseController
      */
     public function index(Request $request)
     {
-        if (!$request->user()->tokenCan('post-list')) {
-            return $this->sendError('Unauthorised Token Ability', []);
-        }
+        // if (!$request->user()->tokenCan('post-list')) {
+        //     return $this->sendError('Unauthorised Token Ability', []);
+        // }
 
         if ($request->user()->is_admin) {
             $posts = Post::all();
@@ -37,9 +37,9 @@ class PostController extends BaseController
      */
     public function store(Request $request)
     {
-        if (!$request->user()->tokenCan('post-store')) {
-            return $this->sendError('Unauthorised Token Ability', []);
-        }
+        // if (!$request->user()->tokenCan('post-store')) {
+        //     return $this->sendError('Unauthorised Token Ability', []);
+        // }
 
         $input = $request->all();
 
@@ -62,9 +62,9 @@ class PostController extends BaseController
      */
     public function show(Request $request, $id)
     {
-        if (!$request->user()->tokenCan('post-show')) {
-            return $this->sendError('Unauthorised Token Ability', []);
-        }
+        // if (!$request->user()->tokenCan('post-show')) {
+        //     return $this->sendError('Unauthorised Token Ability', []);
+        // }
 
         if ($request->user()->is_admin) {
             $post = Post::find($id);
@@ -88,9 +88,9 @@ class PostController extends BaseController
      */
     public function update(Request $request, Post $post)
     {
-        if (!$request->user()->tokenCan('post-update')) {
-            return $this->sendError('Unauthorised Token Ability', []);
-        }
+        // if (!$request->user()->tokenCan('post-update')) {
+        //     return $this->sendError('Unauthorised Token Ability', []);
+        // }
 
         //  Should not allow 'update' on post that it does not belong to the user
         if (!$request->user()->is_admin && $post->customer_id !== $request->user()->id) {
@@ -121,9 +121,9 @@ class PostController extends BaseController
      */
     public function destroy(Request $request, Post $post)
     {
-        if (!$request->user()->tokenCan('post-destroy')) {
-            return $this->sendError('Unauthorised Token Ability', []);
-        }
+        // if (!$request->user()->tokenCan('post-destroy')) {
+        //     return $this->sendError('Unauthorised Token Ability', []);
+        // }
 
         $post->delete();
 
