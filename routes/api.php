@@ -19,6 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::resource('posts', APIPostController::class);
-});
+// Route::middleware(['auth:sanctum'])->group(function () {
+Route::resource('posts', APIPostController::class);
+    // Route::get('/get-post', [APIPostController::class, 'edit'])->name('post.edit');
+    // Route::post('/post', [APIPostController::class, 'store'])->name('post.store');
+    // Route::patch('/post', [APIPostController::class, 'update'])->name('post.update');
+    // Route::delete('/post', [APIPostController::class, 'destroy'])->name('post.destroy');
+// });

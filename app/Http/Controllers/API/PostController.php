@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -49,9 +50,12 @@ class PostController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
+        
         $post = Post::create($input);
 
-        return $this->sendResponse(new PostResource($post), 'Post created successfully.');
+        return redirect(RouteServiceProvider::HOME);
+
+        // return $this->sendResponse(new PostResource($post), 'Post created successfully.');
     }
 
     /**
