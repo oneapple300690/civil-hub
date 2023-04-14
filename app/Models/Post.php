@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,6 +38,10 @@ class Post extends Model
 
     public function user()
     {
-        return $this->belongsToMany(\App\Models\User::class, 'user_posts', 'post_id', 'user_id');
+        return $this->belongsToMany(\App\Models\User::class, 'user_posts', 'post_id', 'user_id')->withTimestamps();
+    }
+
+    public function getCreatedAtAttribute($value) {
+        return Carbon::parse($value)->format('d/m/Y');
     }
 }

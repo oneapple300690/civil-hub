@@ -1,8 +1,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import CreatePostBox from '@/Pages/Post/CreatePostBox';
+import CreatePostBox from '@/Pages/Post/Create';
+import ListPostSection from '@/Pages/Post/List';
 import { Head } from '@inertiajs/react';
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth, posts }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -12,10 +13,13 @@ export default function Dashboard({ auth }) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="overflow-hidden shadow-sm sm:rounded-lg">
                         <CreatePostBox>
 
                         </CreatePostBox>
+                        <ListPostSection posts={posts}>
+
+                        </ListPostSection>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useRef } from "react";
 
 export default forwardRef(function TextInput(
-    { className = "", placeholder="", isFocused = false, ...props },
+    { className = "", placeholder = "", isFocused = false, ...props },
     ref
 ) {
     const input = ref ? ref : useRef();
@@ -15,10 +15,7 @@ export default forwardRef(function TextInput(
     return (
         <textarea
             {...props}
-            className={
-                "border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm " +
-                className
-            }
+            className={className}
             placeholder={placeholder}
             ref={input}
         />

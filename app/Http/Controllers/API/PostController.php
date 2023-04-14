@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PostController extends BaseController
@@ -22,11 +24,13 @@ class PostController extends BaseController
         //     return $this->sendError('Unauthorised Token Ability', []);
         // }
 
-        if ($request->user()->is_admin) {
-            $posts = Post::all();
-        } else {
-            $posts = Post::where('customer_id', $request->user()->id)->get();
-        }
+        // if ($request->user()->is_admin) {
+        //     $posts = Post::all();
+        // } else {
+        //     $posts = Post::where('customer_id', $request->user()->id)->get();
+        // }
+
+        $posts = Post::all();
 
         return $this->sendResponse(PostResource::collection($posts), 'Posts retrieved successfully.');
     }
@@ -49,9 +53,9 @@ class PostController extends BaseController
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
-
         
         $post = Post::create($input);
+        $post->user()->attach($input['user_id']);
 
         return redirect(RouteServiceProvider::HOME);
 
