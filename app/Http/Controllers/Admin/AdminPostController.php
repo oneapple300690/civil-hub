@@ -33,7 +33,7 @@ class AdminPostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function updatePost(Request $request, Post $post)
+    public function updatePost(Request $request)
     {
         $input = $request->all();
 
@@ -43,10 +43,25 @@ class AdminPostController extends Controller
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
+        $post = Post::find($input['commentId']);
         $post->name = $input['name'];
         $post->company = $input['company'];
         $post->comment = $input['comment'];
         $post->save();
+
+        return redirect(RouteServiceProvider::HOME);
+    }
+
+    /**
+     * Display a list of all posts.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deletePost(Request $request)
+    {
+        $input = $request->all();
+        $post = Post::find($input['commentId']);
+        $post->delete();
 
         return redirect(RouteServiceProvider::HOME);
     }

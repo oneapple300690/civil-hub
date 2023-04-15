@@ -28,7 +28,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [AdminPostController::class, 'getAllPosts'])->middleware(['auth', 'verified'])->name('dashboard');
-Route::patch('/posts', [AdminPostController::class, 'updatePost'])->middleware(['auth', 'verified'])->name('adminPost.update');
+Route::post('/update-post', [AdminPostController::class, 'updatePost'])->middleware(['auth', 'verified'])->name('adminPost.update');
+Route::post('/delete-post', [AdminPostController::class, 'deletePost'])->middleware(['auth', 'verified'])->name('adminPost.delete');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

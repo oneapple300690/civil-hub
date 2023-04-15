@@ -25,3 +25,7 @@ main {
 .comment-content {
     @apply text-white text-lg pt-4;
 }
+
+.class-hiding {
+    display: none;
+}

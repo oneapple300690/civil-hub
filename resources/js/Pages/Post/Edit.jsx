@@ -2,24 +2,51 @@ import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextArea from "@/Components/TextArea";
 import { Link, useForm, usePage } from "@inertiajs/react";
+import { useRef } from "react";
 import { Transition } from "@headlessui/react";
 
-export default function EditPost({ className = "", curComment, commentId }) {
+export default function EditPost({
+    className = "",
+    curComment,
+    commentId,
+    posts,
+}) {
     const user = usePage().props.auth.user;
 
-    const { data, setData, post, patch, errors, processing, recentlySuccessful } =
-        useForm({
-            userId: user.id,
-            name: user.name,
-            company: user.company,
-            comment: curComment,
-            commentId: commentId,
-        });
+    const commentEditingInput = useRef();
+
+    const {
+        data,
+        setData,
+        post,
+        get,
+        reset,
+        errors,
+        processing,
+        recentlySuccessful,
+    } = useForm({
+        userId: user.id,
+        name: user.name,
+        company: user.company,
+        comment: curComment,
+        commentId: commentId,
+    });
 
     const submit = (e) => {
         e.preventDefault();
 
-        patch(route("adminPost.update", commentId));
+        post(route("adminPost.update"), {
+            preserveScroll: true,
+            onSuccess: () => {
+                reset();
+                posts = get(route("dashboard"));
+            },
+            onError: (errors) => {
+                if (errors.comment) {
+                    commentEditingInput.current.focus();
+                }
+            },
+        });
     };
 
     return (
@@ -29,9 +56,10 @@ export default function EditPost({ className = "", curComment, commentId }) {
                     <div className="grow bg-stone-700 rounded-lg mt-2 mb-2">
                         <div>
                             <TextArea
-                                id="comment"
+                                id={"comment-" + commentId}
                                 className="p-4 mt-1 mb-1 bg-transparent rounded-lg text-white border-gray-900 focus:outline-none focus:border-white focus:ring-transparent block w-full"
                                 value={data.comment}
+                                ref={commentEditingInput}
                                 onChange={(e) =>
                                     setData("comment", e.target.value)
                                 }

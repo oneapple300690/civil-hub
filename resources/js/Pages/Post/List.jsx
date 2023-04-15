@@ -4,6 +4,8 @@ import TextArea from "@/Components/TextArea";
 import EditPostBox from "@/Pages/Post/Edit";
 import { Link, useForm, usePage } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
+import { useState } from "react";
+import DeletePost from "./Delete";
 
 export default function ListPosts({ className = "", posts }) {
     const user = usePage().props.auth.user;
@@ -17,10 +19,19 @@ export default function ListPosts({ className = "", posts }) {
             comment: "",
         });
 
-    const submit = (e) => {
-        e.preventDefault();
+    const [showingEdit, setShowingEdit] = useState({
+        commentId: 0,
+        showing: false,
+    });
 
-        post(route("posts.store"));
+    const editComment = (commentId) => {
+        setShowingEdit({
+            showing:
+                showingEdit.commentId != commentId
+                    ? true
+                    : !showingEdit.showing,
+            commentId: commentId,
+        });
     };
 
     return (
@@ -64,12 +75,20 @@ export default function ListPosts({ className = "", posts }) {
                         <div className="flex items-center">
                             <div className="flex-1 justify-start whitespace-pre-line">
                                 <div id={"comment-" + item.id}>
-                                    <p className="comment-content">
-                                        {item.comment}
-                                    </p>
-                                    <EditPostBox curComment={item.comment} commentId={item.id}>
-
-                                    </EditPostBox>
+                                    {showingEdit.commentId == item.id &&
+                                    showingEdit.showing ? (
+                                        <div className="comment-content-edit">
+                                            <EditPostBox
+                                                curComment={item.comment}
+                                                commentId={item.id}
+                                                posts={posts}
+                                            ></EditPostBox>
+                                        </div>
+                                    ) : (
+                                        <div className="comment-content">
+                                            {item.comment}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -83,10 +102,7 @@ export default function ListPosts({ className = "", posts }) {
                                     className="w-5 mb-2 cursor-pointer"
                                     onClick={() => editComment(item.id)}
                                 ></img>
-                                <img
-                                    src="/storage/images/btn-delete.png"
-                                    className="w-5 cursor-pointer"
-                                ></img>
+                                <DeletePost commentId={item.id}></DeletePost>
                             </>
                         ) : null}
                     </div>
