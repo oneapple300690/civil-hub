@@ -1,6 +1,7 @@
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextArea from "@/Components/TextArea";
+import EditPostBox from "@/Pages/Post/Edit";
 import { Link, useForm, usePage } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
 
@@ -10,6 +11,7 @@ export default function ListPosts({ className = "", posts }) {
     let count_post = 0;
     const { data, setData, post, errors, processing, recentlySuccessful } =
         useForm({
+            userId: user.id,
             name: user.name,
             company: user.company,
             comment: "",
@@ -29,24 +31,64 @@ export default function ListPosts({ className = "", posts }) {
                     id={"post_" + ++count_post}
                     className="flex"
                 >
-                    <div className="flex-none mr-2">
-                        <img src="/storage/images/default-user.png" className="w-10"></img>
+                    <div className="basis-9 mr-2 ml-2 mt-2">
+                        <img
+                            src="/storage/images/default-user.png"
+                            className="w-10"
+                        ></img>
                     </div>
-                    <div className="bg-stone-700 mt-2 mb-2 flex-1 rounded-lg p-4">
+                    <div className="flex-1 bg-stone-700 mt-2 mb-2 rounded-lg p-4">
                         <div className="flex items-center">
                             <div className="flex-1">
-                                <p className="comment-author-name">{item.name}</p>
-                                <p className="comment-author-company">{item.company}</p>
+                                <p
+                                    className={
+                                        item.user.length > 0 &&
+                                        data.userId == item.user[0].id
+                                            ? "comment-author-name-logged-in"
+                                            : "comment-author-name"
+                                    }
+                                >
+                                    {item.name}
+                                </p>
+
+                                <p className="comment-author-company">
+                                    {item.company}
+                                </p>
                             </div>
                             <div className="flex-1">
-                                <p className="comment-date">{item.created_at}</p>
+                                <p className="comment-date">
+                                    {item.created_at}
+                                </p>
                             </div>
                         </div>
                         <div className="flex items-center">
-                            <div className="justify-start whitespace-pre-line">
-                                <p className="comment-content">{item.comment}</p>
+                            <div className="flex-1 justify-start whitespace-pre-line">
+                                <div id={"comment-" + item.id}>
+                                    <p className="comment-content">
+                                        {item.comment}
+                                    </p>
+                                    <EditPostBox curComment={item.comment} commentId={item.id}>
+
+                                    </EditPostBox>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="basis-9 mr-2 ml-2 mt-2">
+                        {item.user.length > 0 &&
+                        data.userId == item.user[0].id ? (
+                            <>
+                                <img
+                                    src="/storage/images/btn-edit.png"
+                                    className="w-5 mb-2 cursor-pointer"
+                                    onClick={() => editComment(item.id)}
+                                ></img>
+                                <img
+                                    src="/storage/images/btn-delete.png"
+                                    className="w-5 cursor-pointer"
+                                ></img>
+                            </>
+                        ) : null}
                     </div>
                 </div>
             ))}

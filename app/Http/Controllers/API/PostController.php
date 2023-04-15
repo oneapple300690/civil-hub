@@ -55,7 +55,7 @@ class PostController extends BaseController
         }
         
         $post = Post::create($input);
-        $post->user()->attach($input['user_id']);
+        $post->user()->attach($input['userId']);
 
         return redirect(RouteServiceProvider::HOME);
 
@@ -101,9 +101,9 @@ class PostController extends BaseController
         // }
 
         //  Should not allow 'update' on post that it does not belong to the user
-        if (!$request->user()->is_admin && $post->customer_id !== $request->user()->id) {
-            return $this->sendError('Unauthorised Token Ability', []);
-        }
+        // if (!$request->user()->is_admin && $post->customer_id !== $request->user()->id) {
+        //     return $this->sendError('Unauthorised Token Ability', []);
+        // }
 
         $input = $request->all();
 
@@ -118,7 +118,8 @@ class PostController extends BaseController
         $post->comment = $input['comment'];
         $post->save();
 
-        return $this->sendResponse(new PostResource($post), 'Post updated successfully.');
+        return redirect(RouteServiceProvider::HOME);
+        // return $this->sendResponse(new PostResource($post), 'Post updated successfully.');
     }
 
     /**

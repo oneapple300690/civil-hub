@@ -28,15 +28,12 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [AdminPostController::class, 'getAllPosts'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::patch('/posts', [AdminPostController::class, 'updatePost'])->middleware(['auth', 'verified'])->name('adminPost.update');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-Route::get('/test', function(Request $request){
-    dd($request->user());
 });
 
 require __DIR__ . '/auth.php';
