@@ -28,7 +28,7 @@ export default function CreatePost({ className = "" }) {
                 <div className="flex">
                     <div className="basic-9 mr-2 ml-2 mt-2">
                         <img
-                            src="/storage/images/default-user.png"
+                            src="/shared/images/default-user.png"
                             className="w-10"
                         ></img>
                     </div>

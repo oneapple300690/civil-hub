@@ -36,7 +36,7 @@ export default function DeletePost({ className = "", commentId, posts }) {
     return (
         <section className={className}>
             <img
-                src="/storage/images/btn-delete.png"
+                src="/shared/images/btn-delete.png"
                 className="w-5 cursor-pointer"
                 onClick={(e) => deleteComment(e)}
             ></img>
