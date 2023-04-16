@@ -20,7 +20,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        'company',
+        'username',
         'password',
     ];
 
@@ -43,13 +44,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes["password"] = Hash::make($value);
-    }
+    // public function setPasswordAttribute($value)
+    // {
+    //     $this->attributes["password"] = Hash::make($value);
+    // }
 
     public function posts()
     {
-        return $this->belongsToMany(\App\Models\Post::class, 'user_posts', 'user_id', 'post_id');
+        return $this->belongsToMany(\App\Models\Post::class, 'user_posts', 'user_id', 'post_id')->withTimestamps();
     }
 }
