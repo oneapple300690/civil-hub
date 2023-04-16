@@ -44,7 +44,7 @@ export default function ListPosts({ className = "", posts }) {
                 >
                     <div className="basis-9 mr-2 ml-2 mt-2">
                         <img
-                            src="/storage/images/default-user.png"
+                            src="/shared/images/default-user.png"
                             className="w-10"
                         ></img>
                     </div>
@@ -98,7 +98,7 @@ export default function ListPosts({ className = "", posts }) {
                         data.userId == item.user[0].id ? (
                             <>
                                 <img
-                                    src="/storage/images/btn-edit.png"
+                                    src="/shared/images/btn-edit.png"
                                     className="w-5 mb-2 cursor-pointer"
                                     onClick={() => editComment(item.id)}
                                 ></img>
