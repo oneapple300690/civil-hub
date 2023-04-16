@@ -1,5 +1,6 @@
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
+import StandardButton from "@/Components/StandardButton";
 import TextArea from "@/Components/TextArea";
 import { Link, useForm, usePage } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
@@ -7,7 +8,7 @@ import { Transition } from "@headlessui/react";
 export default function CreatePost({ className = "" }) {
     const user = usePage().props.auth.user;
 
-    const { data, setData, post, errors, processing, recentlySuccessful } =
+    const { data, setData, post, errors, reset, processing, recentlySuccessful } =
         useForm({
             userId: user.id,
             name: user.name,
@@ -17,7 +18,7 @@ export default function CreatePost({ className = "" }) {
 
     const submit = (e) => {
         e.preventDefault();
-
+        reset('comment');
         post(route("posts.store"));
     };
 
@@ -53,12 +54,12 @@ export default function CreatePost({ className = "" }) {
                         </div>
 
                         <div className="text-right">
-                            <PrimaryButton
+                            <StandardButton
                                 disabled={processing}
                                 className="m-2"
                             >
                                 Post
-                            </PrimaryButton>
+                            </StandardButton>
                             <Transition
                                 show={recentlySuccessful}
                                 enterFrom="opacity-0"

@@ -39,39 +39,41 @@ export default function UpdateProfileInformation({
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    {/* <InputLabel htmlFor="name" value="Name" /> */}
 
                     <TextInput
                         id="name"
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full placeholder:text-slate-400"
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
                         required
                         isFocused
                         autoComplete="name"
+                        placeholder="Name"
                     />
 
                     <InputError className="mt-2" message={errors.name} />
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="company" value="Company" />
+                    {/* <InputLabel htmlFor="company" value="Company" /> */}
 
                     <TextInput
                         id="company"
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full placeholder:text-slate-400"
                         value={data.company}
                         onChange={(e) => setData("company", e.target.value)}
                         required
                         isFocused
                         autoComplete="company"
+                        placeholder="Company"
                     />
 
                     <InputError className="mt-2" message={errors.name} />
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="username" value="Username" />
+                    {/* <InputLabel htmlFor="username" value="Username" /> */}
 
                     <TextInput
                         id="username"
@@ -81,6 +83,7 @@ export default function UpdateProfileInformation({
                         onChange={(e) => setData("email", e.target.value)}
                         required
                         autoComplete="username"
+                        placeholder="username"
                     />
 
                     <InputError className="mt-2" message={errors.username} />
