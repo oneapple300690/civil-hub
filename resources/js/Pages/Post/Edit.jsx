@@ -1,9 +1,9 @@
 import InputError from "@/Components/InputError";
-import PrimaryButton from "@/Components/PrimaryButton";
 import TextArea from "@/Components/TextArea";
 import { Link, useForm, usePage } from "@inertiajs/react";
 import { useRef } from "react";
 import { Transition } from "@headlessui/react";
+import StandardButton from "@/Components/StandardButton";
 
 export default function EditPost({
     className = "",
@@ -76,12 +76,12 @@ export default function EditPost({
                         </div>
 
                         <div className="text-right">
-                            <PrimaryButton
+                            <StandardButton
                                 disabled={processing}
                                 className="m-2"
                             >
                                 Update
-                            </PrimaryButton>
+                            </StandardButton>
                             <Transition
                                 show={recentlySuccessful}
                                 enterFrom="opacity-0"
