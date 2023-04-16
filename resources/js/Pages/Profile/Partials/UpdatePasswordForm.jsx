@@ -48,7 +48,7 @@ export default function UpdatePasswordForm({ className = '' }) {
 
             <form onSubmit={updatePassword} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="current_password" value="Current Password" />
+                    {/* <InputLabel htmlFor="current_password" value="Current Password" /> */}
 
                     <TextInput
                         id="current_password"
@@ -56,15 +56,16 @@ export default function UpdatePasswordForm({ className = '' }) {
                         value={data.current_password}
                         onChange={(e) => setData('current_password', e.target.value)}
                         type="password"
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full placeholder:text-slate-400"
                         autoComplete="current-password"
+                        placeholder="Current Password"
                     />
 
                     <InputError message={errors.current_password} className="mt-2" />
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="password" value="New Password" />
+                    {/* <InputLabel htmlFor="password" value="New Password" /> */}
 
                     <TextInput
                         id="password"
@@ -72,23 +73,25 @@ export default function UpdatePasswordForm({ className = '' }) {
                         value={data.password}
                         onChange={(e) => setData('password', e.target.value)}
                         type="password"
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full placeholder:text-slate-400"
                         autoComplete="new-password"
+                        placeholder="New Password"
                     />
 
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
+                    {/* <InputLabel htmlFor="password_confirmation" value="Confirm Password" /> */}
 
                     <TextInput
                         id="password_confirmation"
                         value={data.password_confirmation}
                         onChange={(e) => setData('password_confirmation', e.target.value)}
                         type="password"
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full placeholder:text-slate-400"
                         autoComplete="new-password"
+                        placeholder="New Password Confirmation"
                     />
 
                     <InputError message={errors.password_confirmation} className="mt-2" />

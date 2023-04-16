@@ -38,32 +38,34 @@ export default function Login({ status, canResetPassword }) {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="username" value="Username" />
+                    {/* <InputLabel htmlFor="username" value="Username" /> */}
 
                     <TextInput
                         id="username"
                         name="username"
                         value={data.username}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full placeholder:text-slate-400"
                         autoComplete="username"
                         isFocused={true}
                         onChange={(e) => setData("username", e.target.value)}
+                        placeholder="USERNAME"
                     />
 
                     <InputError message={errors.username} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    {/* <InputLabel htmlFor="password" value="Password" /> */}
 
                     <TextInput
                         id="password"
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full placeholder:text-slate-400"
                         autoComplete="current-password"
                         onChange={(e) => setData("password", e.target.value)}
+                        placeholder="PASSWORD"
                     />
 
                     <InputError message={errors.password} className="mt-2" />
@@ -78,20 +80,22 @@ export default function Login({ status, canResetPassword }) {
                                 setData("remember", e.target.checked)
                             }
                         />
-                        <span className="ml-2 text-sm text-gray-600">
+                        <span className="ml-2 text-sm text-white">
                             Remember me
                         </span>
                     </label>
+                </div>
 
-                    <PrimaryButton className="ml-4" disabled={processing}>
-                        Log in
+                <div className="flex items-center justify-center mt-4 items-center">
+                    <PrimaryButton disabled={processing}>
+                        Sign in
                     </PrimaryButton>
                 </div>
 
                 <div className="mt-4 flex items-center justify-center">
                     <Link
                         href={route("register")}
-                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        className="underline text-sm text-white hover:text-indigo-600 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         New? Register an account
                     </Link>
